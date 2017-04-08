@@ -17,6 +17,17 @@ public:
 
 private:
     Ui::AnimationsSetup *ui;
+
+signals:
+
+    void parametersSetUp(int &type, int &speed, int &step);
+
+
+private slots:
+    void on_pushButton_clicked();
 };
+
+
+
 
 #endif // ANIMATIONSSETUP_H
