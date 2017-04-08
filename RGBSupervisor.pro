@@ -24,8 +24,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    animationssetup.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    animationssetup.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    animationssetup.ui
