@@ -12,3 +12,13 @@ AnimationsSetup::~AnimationsSetup()
 {
     delete ui;
 }
+
+void AnimationsSetup::on_pushButton_clicked()
+{
+    int mode = ui->animationsCombo->currentIndex();
+    int speed =  ui->speedSpin->value();
+    int step = ui->stepSpin->value();
+    emit parametersSetUp(mode,speed,step);
+
+
+}
