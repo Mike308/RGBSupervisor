@@ -8,6 +8,7 @@
 #include <3rd/serialdetector.h>
 
 #include "animationssetup.h"
+#include "maincontroller.h"
 
 
 namespace Ui {
@@ -40,7 +41,8 @@ private slots:
 
     void onDetected(int,QSet<QString>);
 
-    void readyRead();
+
+    void setRGBSlot();
 
 
 
@@ -51,6 +53,7 @@ private:
     AnimationsSetup *animationsSetupDialog;
     SerialDetector * serialDetector;
     QSerialPort * serialPort;
+    MainController * mainController;
 
 
 

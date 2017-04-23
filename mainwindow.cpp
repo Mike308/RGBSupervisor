@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QPalette>
 #include <QKeyEvent>
+#include <QTimer>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -13,7 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(animationsSetupDialog,SIGNAL(parametersSetup(int&,int&,int&)),this,SLOT(getSetup(int&,int&,int&)));
     serialDetector = new SerialDetector();
     connect(serialDetector,SIGNAL(onDetect(int,QSet<QString>)),this,SLOT(onDetected(int,QSet<QString>)));
-    serialPort = new QSerialPort(this);
+//    serialPort = new QSerialPort(this);
+    mainController = new MainController();
+
 
 
 
@@ -45,6 +48,8 @@ void MainWindow::on_rSlider_valueChanged(int value)
     ui->colorProbe->setPalette(pal);
     ui->colorProbe->setAutoFillBackground(true);
     ui->rLabel->setText(QString::number(value));
+    QTimer::singleShot(1000,this,SLOT(setRGBSlot()));
+
 
 }
 
@@ -57,6 +62,7 @@ void MainWindow::on_gSlider_valueChanged(int value)
     ui->colorProbe->setPalette(pal);
     ui->colorProbe->setAutoFillBackground(true);
     ui->gLabel->setText(QString::number(value));
+    QTimer::singleShot(10000,this,SLOT(setRGBSlot()));
 }
 
 void MainWindow::on_bSlider_valueChanged(int value)
@@ -68,6 +74,7 @@ void MainWindow::on_bSlider_valueChanged(int value)
     ui->colorProbe->setPalette(pal);
     ui->colorProbe->setAutoFillBackground(true);
     ui->bLabel->setText(QString::number(value));
+    QTimer::singleShot(1000,this,SLOT(setRGBSlot()));
 
 }
 
@@ -76,22 +83,22 @@ void MainWindow::onDetected(int status, QSet<QString> coms){
 
     foreach (QString comName, coms) {
 
-        qDebug () << status << " " << comName;
+        if (status == 1){
+
+           mainController->connectToController(comName,9600);
+           qDebug () << "Connected: " << comName;
+
+        }else{
+
+
+            mainController->disconnect();
+            qDebug () << "Disconnected...";
+
+        }
 
     }
 
-    if (status == 1){
 
-        serialPort->setBaudRate(9600);
-        serialPort->setFlowControl(QSerialPort::NoFlowControl);
-        serialPort->setDataBits(QSerialPort::Data8);
-        serialPort->setStopBits(QSerialPort::OneStop);
-        serialPort->open(QIODevice::ReadWrite);
-
-    }else{
-
-        serialPort->close();
-    }
 
 
 
@@ -101,9 +108,10 @@ void MainWindow::onDetected(int status, QSet<QString> coms){
 
 }
 
-void MainWindow::readyRead(){
+void MainWindow::setRGBSlot(){
 
-
+    mainController->setRGB(ui->rSlider->value(),ui->gSlider->value(),ui->bSlider->value());
+    qDebug () << "Fire: " << ui->rSlider->value();
 }
 
 
