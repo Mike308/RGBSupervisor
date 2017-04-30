@@ -14,8 +14,18 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(animationsSetupDialog,SIGNAL(parametersSetup(int&,int&,int&)),this,SLOT(getSetup(int&,int&,int&)));
     serialDetector = new SerialDetector();
     connect(serialDetector,SIGNAL(onDetect(int,QSet<QString>)),this,SLOT(onDetected(int,QSet<QString>)));
-//    serialPort = new QSerialPort(this);
     mainController = new MainController();
+    QSerialPortInfo serialPortInfo;
+    QList<QSerialPortInfo> availablePorts = serialPortInfo.availablePorts();
+
+    foreach (QSerialPortInfo availablePort, availablePorts){
+
+        ui->serialCombo->addItem(availablePort.portName());
+
+
+    }
+
+
 
 
 
