@@ -18,9 +18,12 @@ public:
 private:
     Ui::AnimationsSetup *ui;
 
+
+
+
 signals:
 
-    void parametersSetUp(int &type, int &speed, int &step);
+    void parametersSetup(int &type, int &speed, int &step);
 
 
 private slots:

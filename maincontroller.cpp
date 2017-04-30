@@ -17,8 +17,8 @@ void MainController::connectToController(QString comName, int baud){
         serialPort->setFlowControl(QSerialPort::NoFlowControl);
         serialPort->setDataBits(QSerialPort::Data8);
         serialPort->setStopBits(QSerialPort::OneStop);
-
         serialPort->open(QIODevice::ReadWrite);
+        connect(serialPort,SIGNAL(readyRead()),this,SLOT(onRead()));
 
     }
 }
@@ -52,6 +52,14 @@ void MainController::setAnimation(int mode, int speed, int step){
 
 }
 
+void MainController::temperatureRequest(){
+
+    sendToController("AT+TEMP?\r\n");
+
+}
+
+
+
 void MainController::disconnect(){
 
     serialPort->close();
@@ -63,6 +71,27 @@ bool MainController::isControllerConnected(){
     return serialPort->isOpen();
 
 }
+
+
+void MainController::onRead(){
+
+    if (serialPort->canReadLine()){
+
+        QString resultStr = QString::fromLatin1(serialPort->readAll());
+        qDebug() << "Result: " << resultStr;
+        float temperature = resultStr.toFloat();
+        emit onGetTemp(temperature);
+
+    }
+
+
+
+}
+
+
+
+
+
 
 
 
