@@ -127,8 +127,10 @@ void MainWindow::onDetected(int status, QSet<QString> coms){
 
 void MainWindow::setRGBSlot(){
 
+    timer->stop();
     mainController->setRGB(ui->rSlider->value(),ui->gSlider->value(),ui->bSlider->value());
     qDebug () << "Fire: " << ui->rSlider->value();
+    timer->start(10000);
 }
 
 
