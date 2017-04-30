@@ -79,7 +79,7 @@ void MainWindow::on_gSlider_valueChanged(int value)
     ui->colorProbe->setPalette(pal);
     ui->colorProbe->setAutoFillBackground(true);
     ui->gLabel->setText(QString::number(value));
-    QTimer::singleShot(10000,this,SLOT(setRGBSlot()));
+    QTimer::singleShot(1000,this,SLOT(setRGBSlot()));
 }
 
 void MainWindow::on_bSlider_valueChanged(int value)
