@@ -68,6 +68,7 @@ void MainWindow::on_rSlider_valueChanged(int value)
     QTimer::singleShot(1000,this,SLOT(setRGBSlot()));
 
 
+
 }
 
 void MainWindow::on_gSlider_valueChanged(int value)
@@ -151,3 +152,62 @@ void MainWindow::on_serialCombo_highlighted(const QString &arg1)
 {
 
 }
+
+void MainWindow::on_dial_actionTriggered(int action)
+{
+    QColor color;
+    QPalette pal;
+    color.setHsv(ui->hsvDial->value(),100,100);
+    pal.setBrush(QPalette::Background,color);
+
+
+}
+
+void MainWindow::on_hsvDial_actionTriggered(int action)
+{
+    QColor color;
+    QColor rgbColor;
+    QPalette pal;
+    color.setHsv(ui->hsvDial->value(),100,100);
+    pal.setBrush(QPalette::Background,color);
+    rgbColor = color.toRgb();
+    ui->colorProbe->setPalette(pal);
+    ui->colorProbe->setAutoFillBackground(true);
+    ui->rSlider->setValue(color.red());
+    ui->gSlider->setValue(color.green());
+    ui->bSlider->setValue(color.blue());
+
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    if (!mainController->isControllerConnected()){
+
+        mainController->connectToController(ui->serialCombo->currentText(),9600);
+        mainController->setRGB(0,0,0);
+        ui->pushButton_2->setText("Disconnect");
+        timer->start(10000);
+
+
+    }else {
+
+        mainController->disconnect();
+        ui->pushButton_2->setText("Connect");
+        timer->stop();
+
+    }
+
+}
+
+void MainWindow::onTick(){
+
+    mainController->temperatureRequest();
+
+}
+
+void MainWindow::onGetTempSlot(float temperature){
+
+    ui->lcdNumber->display(temperature);
+}
+
+
