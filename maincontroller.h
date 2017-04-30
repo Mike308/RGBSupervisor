@@ -3,7 +3,7 @@
 #include <QSerialPort>
 #include <QObject>
 
-class MainController : QObject
+class MainController : public QObject
 
 {
 
@@ -17,12 +17,24 @@ public:
     void setHSV(int h, int s, int v);
     void setAnimation(int mode, int speed, int step);
     bool isControllerConnected();
+    void temperatureRequest();
 
 
 
 private:
     QSerialPort * serialPort;
     void sendToController(QString command);
+
+public slots:
+
+    void onRead();
+
+
+
+
+signals:
+
+    void onGetTemp(float temperature);
 
 };
 

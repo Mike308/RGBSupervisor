@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,10 +26,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    animationssetup.cpp
+    animationssetup.cpp \
+    3rd/serialdetector.cpp \
+    3rd/serialscanner.cpp \
+    maincontroller.cpp
 
 HEADERS  += mainwindow.h \
-    animationssetup.h
+    animationssetup.h \
+    3rd/serialdetector.h \
+    3rd/serialscanner.h \
+    maincontroller.h
 
 FORMS    += mainwindow.ui \
     animationssetup.ui
