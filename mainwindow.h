@@ -41,10 +41,17 @@ private slots:
 
     void onDetected(int,QSet<QString>);
 
-
     void setRGBSlot();
 
+    void on_dial_actionTriggered(int action);
 
+    void on_hsvDial_actionTriggered(int action);
+
+    void on_pushButton_2_clicked();
+
+    void onTick();
+
+    void onGetTempSlot(float temperature);
 
 
 
@@ -54,6 +61,7 @@ private:
     SerialDetector * serialDetector;
     QSerialPort * serialPort;
     MainController * mainController;
+    QTimer *timer;
 
 
 
