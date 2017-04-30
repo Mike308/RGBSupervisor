@@ -11,12 +11,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     animationsSetupDialog = new AnimationsSetup();
-    connect(animationsSetupDialog,SIGNAL(parametersSetup(int&,int&,int&)),this,SLOT(getSetup(int&,int&,int&)));
-    serialDetector = new SerialDetector();
-    connect(serialDetector,SIGNAL(onDetect(int,QSet<QString>)),this,SLOT(onDetected(int,QSet<QString>)));
     mainController = new MainController();
+    serialDetector = new SerialDetector();
+    timer = new QTimer();
+
+    connect(animationsSetupDialog,SIGNAL(parametersSetup(int&,int&,int&)),this,SLOT(getSetup(int&,int&,int&)));
+    connect(serialDetector,SIGNAL(onDetect(int,QSet<QString>)),this,SLOT(onDetected(int,QSet<QString>)));
+    connect(timer,SIGNAL(timeout()),this,SLOT(onTick()));
+    connect(mainController,SIGNAL(onGetTemp(float)),this,SLOT(onGetTempSlot(float)));
+
     QSerialPortInfo serialPortInfo;
     QList<QSerialPortInfo> availablePorts = serialPortInfo.availablePorts();
+
 
     foreach (QSerialPortInfo availablePort, availablePorts){
 
