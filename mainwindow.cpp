@@ -46,6 +46,7 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::getSetup(int &type, int &speed, int &step){
 
     qDebug () << "Type: " << type << "Speed: " << speed << "Step: " << step;
+    mainController->setAnimation(type,speed,step);
 
 }
 
