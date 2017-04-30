@@ -6,6 +6,8 @@ AnimationsSetup::AnimationsSetup(QWidget *parent) :
     ui(new Ui::AnimationsSetup)
 {
     ui->setupUi(this);
+    ui->animationsCombo->addItem("Color wheel");
+    ui->animationsCombo->addItem("Random colors switching");
 }
 
 AnimationsSetup::~AnimationsSetup()
@@ -18,7 +20,11 @@ void AnimationsSetup::on_pushButton_clicked()
     int mode = ui->animationsCombo->currentIndex();
     int speed =  ui->speedSpin->value();
     int step = ui->stepSpin->value();
-    emit parametersSetUp(mode,speed,step);
+    emit parametersSetup(mode,speed,step);
+    this->close();
 
 
 }
+
+
+
