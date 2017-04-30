@@ -46,9 +46,21 @@ void MainController::setHSV(int h, int s, int v){
 
 }
 
+void MainController::setAnimation(int mode, int speed, int step){
+
+    sendToController("AT+ANIM="+QString::number(mode)+","+QString::number(speed)+","+QString::number(step)+"\r\n");
+
+}
+
 void MainController::disconnect(){
 
     serialPort->close();
+
+}
+
+bool MainController::isControllerConnected(){
+
+    return serialPort->isOpen();
 
 }
 

@@ -16,6 +16,7 @@ public:
     void setRGB(int r, int g, int b);
     void setHSV(int h, int s, int v);
     void setAnimation(int mode, int speed, int step);
+    bool isControllerConnected();
 
 
 
