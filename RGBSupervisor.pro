@@ -39,3 +39,6 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     animationssetup.ui
+
+RESOURCES += \
+    res/res.qrc
