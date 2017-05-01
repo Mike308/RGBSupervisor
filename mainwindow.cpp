@@ -5,6 +5,7 @@
 #include <QTimer>
 
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -14,11 +15,13 @@ MainWindow::MainWindow(QWidget *parent) :
     mainController = new MainController();
     serialDetector = new SerialDetector();
     timer = new QTimer();
+    dialog = new QColorDialog();
 
     connect(animationsSetupDialog,SIGNAL(parametersSetup(int&,int&,int&)),this,SLOT(getSetup(int&,int&,int&)));
     connect(serialDetector,SIGNAL(onDetect(int,QSet<QString>)),this,SLOT(onDetected(int,QSet<QString>)));
     connect(timer,SIGNAL(timeout()),this,SLOT(onTick()));
     connect(mainController,SIGNAL(onGetTemp(float)),this,SLOT(onGetTempSlot(float)));
+    connect(dialog,SIGNAL(currentColorChanged(QColor)),this,SLOT(onColorGet(QColor)));
 
     QSerialPortInfo serialPortInfo;
     QList<QSerialPortInfo> availablePorts = serialPortInfo.availablePorts();
