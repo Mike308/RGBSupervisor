@@ -158,27 +158,14 @@ void MainWindow::on_serialCombo_highlighted(const QString &arg1)
 
 void MainWindow::on_dial_actionTriggered(int action)
 {
-    QColor color;
-    QPalette pal;
-    color.setHsv(ui->hsvDial->value(),100,100);
-    pal.setBrush(QPalette::Background,color);
+
 
 
 }
 
 void MainWindow::on_hsvDial_actionTriggered(int action)
 {
-    QColor color;
-    QColor rgbColor;
-    QPalette pal;
-    color.setHsv(ui->hsvDial->value(),100,100);
-    pal.setBrush(QPalette::Background,color);
-    rgbColor = color.toRgb();
-    ui->colorProbe->setPalette(pal);
-    ui->colorProbe->setAutoFillBackground(true);
-    ui->rSlider->setValue(color.red());
-    ui->gSlider->setValue(color.green());
-    ui->bSlider->setValue(color.blue());
+
 
 }
 
