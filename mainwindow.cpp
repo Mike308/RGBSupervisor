@@ -211,3 +211,21 @@ void MainWindow::onGetTempSlot(float temperature){
 }
 
 
+
+void MainWindow::on_pushButton_3_clicked()
+{
+
+    dialog->setOption(QColorDialog::NoButtons);
+    dialog->setOption(QColorDialog::ShowAlphaChannel);
+    dialog->show();
+
+
+
+}
+
+void MainWindow::onColorGet(QColor color){
+
+    ui->rSlider->setValue(color.red());
+    ui->gSlider->setValue(color.green());
+    ui->bSlider->setValue(color.blue());
+}

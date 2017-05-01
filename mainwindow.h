@@ -5,10 +5,13 @@
 #include <QDebug>
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QColorDialog>
 #include <3rd/serialdetector.h>
+
 
 #include "animationssetup.h"
 #include "maincontroller.h"
+
 
 
 namespace Ui {
@@ -53,11 +56,16 @@ private slots:
 
     void onGetTempSlot(float temperature);
 
+    void onColorGet(QColor color);
 
+
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;
     AnimationsSetup *animationsSetupDialog;
+    QColorDialog *dialog;
     SerialDetector * serialDetector;
     QSerialPort * serialPort;
     MainController * mainController;
