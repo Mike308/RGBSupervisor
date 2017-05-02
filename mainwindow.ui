@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>res/colours_rgb.ico</normaloff>res/colours_rgb.ico</iconset>
+    <normaloff>res/colours_rgb.png</normaloff>res/colours_rgb.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="layoutWidget">
@@ -666,7 +666,7 @@ border-bottom-left-radius: 9px;
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -694,6 +694,12 @@ border-bottom-left-radius: 9px;
     padding: 6px;
 }
 QPushButton:pressed {
+    
+	background-color: rgb(0, 85, 255);
+    border-style: inset;
+}
+
+QPushButton:hover {
     
 	background-color: rgb(0, 85, 255);
     border-style: inset;
@@ -726,6 +732,11 @@ QPushButton:pressed {
     
 	background-color: rgb(0, 170, 0);
     border-style: inset;
+}
+QPushButton:hover {
+    
+	background-color: rgb(0, 170, 0);
+    border-style: inset;
 }</string>
        </property>
        <property name="text">
@@ -754,6 +765,14 @@ QPushButton:pressed {
     padding: 6px;
 }
 QPushButton:pressed {
+    
+	
+	
+    background-color: rgb(85, 0, 255);
+    border-style: inset;
+}
+
+QPushButton:hover {
     
 	
 	
