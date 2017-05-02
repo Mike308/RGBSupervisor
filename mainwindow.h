@@ -7,6 +7,7 @@
 #include <QSerialPortInfo>
 #include <QColorDialog>
 #include <3rd/serialdetector.h>
+#include <QSystemTrayIcon>
 
 
 #include "animationssetup.h"
@@ -70,6 +71,7 @@ private:
     QSerialPort * serialPort;
     MainController * mainController;
     QTimer *timer;
+    QSystemTrayIcon *tray;
 
 
 

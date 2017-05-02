@@ -3,6 +3,7 @@
 #include <QPalette>
 #include <QKeyEvent>
 #include <QTimer>
+#include <QSystemTrayIcon>
 
 
 
@@ -16,6 +17,12 @@ MainWindow::MainWindow(QWidget *parent) :
     serialDetector = new SerialDetector();
     timer = new QTimer();
     dialog = new QColorDialog();
+    QIcon ico(":/ico/res/colours_rgb.ico");
+    tray = new QSystemTrayIcon(ico,this);
+    tray->show();
+    this->setWindowIcon(ico);
+    animationsSetupDialog->setWindowIcon(ico);
+    dialog->setWindowIcon(ico);
 
     connect(animationsSetupDialog,SIGNAL(parametersSetup(int&,int&,int&)),this,SLOT(getSetup(int&,int&,int&)));
     connect(serialDetector,SIGNAL(onDetect(int,QSet<QString>)),this,SLOT(onDetected(int,QSet<QString>)));
@@ -40,11 +47,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
+
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete mainController;
+    delete animationsSetupDialog;
+    delete dialog;
+
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -113,7 +126,11 @@ void MainWindow::onDetected(int status, QSet<QString> coms){
 
 
             mainController->disconnect();
+            ui->pushButton_2->setText("Connect");
+            timer->stop();
             qDebug () << "Disconnected...";
+            tray->show();
+            tray->showMessage("Infomration","Device disconnected");
 
         }
 
