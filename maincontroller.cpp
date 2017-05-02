@@ -7,6 +7,8 @@ MainController::MainController()
 
 }
 
+
+
 void MainController::connectToController(QString comName, int baud){
 
     if (!serialPort->isOpen()){

@@ -41,4 +41,7 @@ FORMS    += mainwindow.ui \
     animationssetup.ui
 
 RESOURCES += \
-    res/res.qrc
+    res.qrc
+
+DISTFILES += \
+    res/colours_rgb.png

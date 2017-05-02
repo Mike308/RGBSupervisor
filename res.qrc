@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/ico">
+        <file>res/colours_rgb.png</file>
+        <file>res/colours_rgb.ico</file>
+    </qresource>
+</RCC>
