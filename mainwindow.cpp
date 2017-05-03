@@ -49,6 +49,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(mainController,SIGNAL(onGetTemp(float)),this,SLOT(onGetTempSlot(float)));
     connect(dialog,SIGNAL(currentColorChanged(QColor)),this,SLOT(onColorGet(QColor)));
     connect(temperatureNotificationAction,SIGNAL(triggered(bool)),this,SLOT(showTemperatureNotification()));
+    connect(exitAction,SIGNAL(triggered(bool)),this,SLOT(exit()));
+    connect(showAction,SIGNAL(triggered(bool)),this,SLOT(showed()));
+
 
 
 
