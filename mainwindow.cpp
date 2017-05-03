@@ -69,13 +69,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-
-
-
-
-
 }
-
 
 
 
@@ -164,9 +158,9 @@ void MainWindow::onDetected(int status, QSet<QString> coms){
 
         if (status == 1){
 
-           ui->serialCombo->clear();
-           ui->serialCombo->addItem(comName);
-           ui->serialCombo->setCurrentText(comName);
+            ui->serialCombo->clear();
+            ui->serialCombo->addItem(comName);
+            ui->serialCombo->setCurrentText(comName);
 
         }else{
 
@@ -177,7 +171,7 @@ void MainWindow::onDetected(int status, QSet<QString> coms){
             qDebug () << "Disconnected...";
             tray->show();
             tray->showMessage("Infomration","Device disconnected");
-           // ui->serialCombo->removeItem(ui->serialCombo->ind);
+            // ui->serialCombo->removeItem(ui->serialCombo->ind);
 
         }
 
