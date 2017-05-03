@@ -63,6 +63,10 @@ private slots:
 
     void showTemperatureNotification();
 
+    void exit();
+
+    void showed();
+
 private:
     Ui::MainWindow *ui;
     AnimationsSetup *animationsSetupDialog;

@@ -15,8 +15,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QIcon temperatureIcon(":/ico/res/thermometer_snowflake.ico");
     QIcon ico(":/ico/res/colours_rgb.ico");
-    QMenu * contextMenu = new QMenu("Show temperature");
+    QIcon exitIcon(":/ico/res/exit.ico");
+    QMenu * contextMenu = new QMenu("Tray");
     QAction *temperatureNotificationAction = contextMenu->addAction(temperatureIcon,"Show temperature");
+    QAction *exitAction = contextMenu->addAction(exitIcon,"Exit");
+    QAction *showAction = contextMenu->addAction("Show");
+
+
+
 
 
 
