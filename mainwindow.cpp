@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QIcon ico(":/ico/res/colours_rgb.ico");
     tray = new QSystemTrayIcon(ico,this);
     tray->show();
+    tray->setContextMenu(contextMenu);
     this->setWindowIcon(ico);
     animationsSetupDialog->setWindowIcon(ico);
     dialog->setWindowIcon(ico);
