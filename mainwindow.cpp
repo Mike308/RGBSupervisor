@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
+    QIcon temperatureIcon(":/ico/res/thermometer_snowflake.ico");
     ui->setupUi(this);
     animationsSetupDialog = new AnimationsSetup();
     mainController = new MainController();
