@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     QIcon temperatureIcon(":/ico/res/thermometer_snowflake.ico");
+    QMenu * contextMenu = new QMenu("Show temperature");
+    QAction *temperatureNotificationAction = contextMenu->addAction(temperatureIcon,"Show temperature");
     ui->setupUi(this);
     animationsSetupDialog = new AnimationsSetup();
     mainController = new MainController();
