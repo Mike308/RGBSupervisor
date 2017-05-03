@@ -59,9 +59,9 @@ private slots:
 
     void onColorGet(QColor color);
 
-
-
     void on_pushButton_3_clicked();
+
+    void showTemperatureNotification();
 
 private:
     Ui::MainWindow *ui;
@@ -72,6 +72,8 @@ private:
     MainController * mainController;
     QTimer *timer;
     QSystemTrayIcon *tray;
+
+
 
 
 

@@ -4,6 +4,7 @@
 #include <QKeyEvent>
 #include <QTimer>
 #include <QSystemTrayIcon>
+#include <QMenu>
 
 
 
@@ -13,21 +14,28 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     QIcon temperatureIcon(":/ico/res/thermometer_snowflake.ico");
+    QIcon ico(":/ico/res/colours_rgb.ico");
     QMenu * contextMenu = new QMenu("Show temperature");
     QAction *temperatureNotificationAction = contextMenu->addAction(temperatureIcon,"Show temperature");
+
+
+
+
     ui->setupUi(this);
     animationsSetupDialog = new AnimationsSetup();
     mainController = new MainController();
     serialDetector = new SerialDetector();
     timer = new QTimer();
     dialog = new QColorDialog();
-    QIcon ico(":/ico/res/colours_rgb.ico");
+
     tray = new QSystemTrayIcon(ico,this);
     tray->show();
     tray->setContextMenu(contextMenu);
+
     this->setWindowIcon(ico);
     animationsSetupDialog->setWindowIcon(ico);
     dialog->setWindowIcon(ico);
+
 
     connect(animationsSetupDialog,SIGNAL(parametersSetup(int&,int&,int&)),this,SLOT(getSetup(int&,int&,int&)));
     connect(serialDetector,SIGNAL(onDetect(int,QSet<QString>)),this,SLOT(onDetected(int,QSet<QString>)));
@@ -35,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(mainController,SIGNAL(onGetTemp(float)),this,SLOT(onGetTempSlot(float)));
     connect(dialog,SIGNAL(currentColorChanged(QColor)),this,SLOT(onColorGet(QColor)));
     connect(temperatureNotificationAction,SIGNAL(triggered(bool)),this,SLOT(showTemperatureNotification()));
+
+
 
     QSerialPortInfo serialPortInfo;
     QList<QSerialPortInfo> availablePorts = serialPortInfo.availablePorts();
@@ -57,12 +67,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
+
+
+
+
 MainWindow::~MainWindow()
 {
     delete ui;
     delete mainController;
     delete animationsSetupDialog;
     delete dialog;
+    delete tray;
+
 
 }
 
@@ -125,8 +141,9 @@ void MainWindow::onDetected(int status, QSet<QString> coms){
 
         if (status == 1){
 
-           mainController->connectToController(comName,9600);
-           qDebug () << "Connected: " << comName;
+           ui->serialCombo->clear();
+           ui->serialCombo->addItem(comName);
+           ui->serialCombo->setCurrentText(comName);
 
         }else{
 
@@ -137,6 +154,7 @@ void MainWindow::onDetected(int status, QSet<QString> coms){
             qDebug () << "Disconnected...";
             tray->show();
             tray->showMessage("Infomration","Device disconnected");
+           // ui->serialCombo->removeItem(ui->serialCombo->ind);
 
         }
 
@@ -198,6 +216,7 @@ void MainWindow::on_pushButton_2_clicked()
 
         mainController->connectToController(ui->serialCombo->currentText(),9600);
         mainController->setRGB(0,0,0);
+        mainController->temperatureRequest();
         ui->pushButton_2->setText("Disconnect");
         timer->start(10000);
 
@@ -241,4 +260,11 @@ void MainWindow::onColorGet(QColor color){
     ui->rSlider->setValue(color.red());
     ui->gSlider->setValue(color.green());
     ui->bSlider->setValue(color.blue());
+}
+
+void MainWindow::showTemperatureNotification(){
+
+    tray->show();
+    tray->showMessage("Temperature","Temperature: "+QString::number(ui->lcdNumber->value()));
+
 }
