@@ -77,6 +77,11 @@ private:
     QTimer *timer;
     QSystemTrayIcon *tray;
 
+protected:
+
+    void closeEvent(QCloseEvent * event);
+
+
 
 
 

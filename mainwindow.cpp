@@ -91,6 +91,20 @@ MainWindow::~MainWindow()
 
 }
 
+
+void MainWindow::closeEvent(QCloseEvent *event){
+
+    if (this->isVisible()){
+
+        event->ignore();
+        this->hide();
+        tray->show();
+        tray->showMessage("Info", "See you later...");
+
+    }
+
+}
+
 void MainWindow::on_pushButton_clicked()
 {
     animationsSetupDialog->show();
