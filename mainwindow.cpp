@@ -291,3 +291,22 @@ void MainWindow::showTemperatureNotification(){
     tray->showMessage("Temperature","Temperature: "+QString::number(ui->lcdNumber->value()));
 
 }
+
+void MainWindow::exit(){
+
+    this->close();
+    qDebug() << "Clossing..";
+
+}
+
+void MainWindow::showed(){
+
+    if (!this->isVisible()){
+
+        this->show();
+
+    }
+
+}
+
+
